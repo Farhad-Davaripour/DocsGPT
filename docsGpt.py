@@ -34,6 +34,16 @@ from langchain.vectorstores import ElasticVectorSearch, Pinecone, Weaviate, FAIS
 from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 
+# print("You need OpenAI token: Here is the link to get the keys: https://platform.openai.com/account/billing/overview")
+
+
+
+token = input("Enter your OpenAI token: ()")
+
+import os
+os.environ["OPENAI_API_KEY"] = str(token)
+
+
 # Download embeddings from OpenAI
 embeddings = OpenAIEmbeddings()
 chain = load_qa_chain(OpenAI(), chain_type="stuff")
