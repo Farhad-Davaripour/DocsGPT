@@ -19,7 +19,7 @@ for name in library_names:
     except ImportError:
         print(f"{name} not found. Installing {name}...")
         subprocess.check_call([sys.executable, '-m', 'pip', 'install', name])
-        __import__(name)
+        
 
 
 from PyPDF2 import PdfReader
