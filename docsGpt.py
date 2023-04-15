@@ -73,3 +73,63 @@ def run_query(query, file):
     docsearch = upload_doc(file)
     docs = docsearch.similarity_search(query)
     return chain.run(input_documents=docs, question=query)
+
+
+from google.colab import files
+uploaded = files.upload()
+
+
+import os
+import shutil
+for filename, data in uploaded.items():
+    with open(filename, 'wb') as f:
+        f.write(data)
+    shutil.copy(filename, folder_path + "/")
+    root_file = folder_path + "/" + filename
+    os.remove(filename)
+
+
+# location of the pdf file/files.
+reader = PdfReader(str(root_file))
+
+
+# define a function to get user input and validate their choice
+def get_user_input(choices, prompt):
+    """
+    Get user input and validate their choice.
+    Args:
+        choices (list): A list of possible choices.
+        prompt (str): The prompt to display to the user.
+    Returns:
+        str: The user's choice.
+    """
+    while True:
+        user_input = input(prompt)
+        if user_input in choices:
+            return user_input
+        else:
+            print("Invalid choice. Please try again.")
+
+# define the available choices
+choices = ['Yes', 'No']
+
+# define the prompt for the user
+prompt = "Do you stil have queestion from PDF?: "
+
+# get user input
+user_choice = get_user_input(choices, prompt)
+
+# display the user's choice
+print("You chose option", user_choice)
+
+
+
+
+count = 0
+while True:
+    query = input("Ask your question: ")
+    print(run_query(query, reader))
+    count += 1
+    if count == 10:
+        print("You asked 10 questions, run cell to ask more questions")
+        break
