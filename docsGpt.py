@@ -105,9 +105,9 @@ def run_conversation():
 
   count = 0
   while True:
-      query = input("Ask your question: ")
+      query = input("Question ", count + 1, " Ask your question: ")
       print(run_query(query, reader))
       count += 1
       if count == 10:
-          print("You asked 10 questions, run cell to ask more questions")
+          print("### You asked 10 questions, run cell to ask more questions! ###")
           break
