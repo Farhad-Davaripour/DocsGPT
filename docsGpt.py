@@ -19,7 +19,7 @@ for name in library_names:
     except ImportError:
         print(f"{name} not found. Installing {name}...")
         subprocess.check_call([sys.executable, '-m', 'pip', 'install', name])
-        
+
 
 
 from PyPDF2 import PdfReader
@@ -31,7 +31,9 @@ from langchain.llms import OpenAI
 
 # print("You need OpenAI token: Here is the link to get the keys: https://platform.openai.com/account/billing/overview")
 
-token = input("Enter your OpenAI token: ()")
+from getpass import getpass
+
+token = getpass("Enter your OpenAI token: ()")
 
 import os
 os.environ["OPENAI_API_KEY"] = str(token)
