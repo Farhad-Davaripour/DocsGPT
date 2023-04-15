@@ -8,6 +8,9 @@
 # Import required modules
 import sys
 import subprocess
+from google.colab import files
+import os
+import shutil
 
 # List of library names to import
 library_names = ['langchain', 'openai', 'PyPDF2', 'tiktoken', 'faiss-cpu']
@@ -75,18 +78,8 @@ def run_query(query, file):
     return chain.run(input_documents=docs, question=query)
 
 
-from google.colab import files
-import os
-import shutil
-
-
-
-def upload_file():
+def upload_file(folder_path):
   uploaded = files.upload()
-
-  drive_path = '/content/drive/MyDrive'
-  folder_name = 'git_repo'
-  folder_path = os.path.join(drive_path, folder_name)
 
   for filename, data in uploaded.items():
       with open(filename, 'wb') as f:
@@ -99,13 +92,14 @@ def upload_file():
 
 
 
-def run_conversation():
+def run_conversation(folder_path):
   # location of the pdf file/files.
-  reader = PdfReader(str(upload_file()))
+  reader = PdfReader(str(upload_file(folder_path)))
 
   count = 0
   while True:
-      query = input("Question ", count + 1, " Ask your question: ")
+      print("Question ", count + 1)
+      query = input(" Ask your question: ")
       print(run_query(query, reader))
       count += 1
       if count == 10:
