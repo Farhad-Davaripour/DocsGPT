@@ -10,7 +10,7 @@ import sys
 import subprocess
 
 # List of library names to import
-library_names = ['langchain', 'openai', 'PyPDF2', 'tiktoken']
+library_names = ['langchain', 'openai', 'PyPDF2', 'tiktoken', 'faiss-cpu']
 
 # Dynamically import libraries from list
 for name in library_names:
@@ -26,17 +26,10 @@ from PyPDF2 import PdfReader
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import ElasticVectorSearch, Pinecone, Weaviate, FAISS
-
-
-
-
-
 from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 
 # print("You need OpenAI token: Here is the link to get the keys: https://platform.openai.com/account/billing/overview")
-
-
 
 token = input("Enter your OpenAI token: ()")
 
