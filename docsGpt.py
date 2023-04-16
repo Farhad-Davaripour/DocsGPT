@@ -147,9 +147,10 @@ def run_conversation(folder_path):
     count = 0
     while True:
         print("Question ", count + 1)
-        query = input(" Ask your question: ")
-        print(run_query(query, reader))
-        count += 1
-        if count == 10:
-            print("### You asked 10 questions, run cell to ask more questions! ###")
+        query = input(" Ask your question or if you have no further question type stop:\n ")
+        if query != "stop":
+            print("Answer:\n", run_query(query, reader))
+            count += 1
+        else:
+            print("### Thanks for using the app! ###")
             break
