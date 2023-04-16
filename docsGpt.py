@@ -15,7 +15,8 @@ import time
 
 
 # List of library names to import
-library_names = ['langchain', 'openai', 'PyPDF2', 'tiktoken', 'faiss-cpu']
+library_names = ['langchain', 'openai', 'PyPDF2', 
+                 'tiktoken', 'faiss-cpu', 'inputimeout']
 
 # Dynamically import libraries from list
 for name in library_names:
@@ -35,6 +36,7 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 from getpass import getpass
 import os
+from inputimeout import inputimeout
 
 # adding token
 # print("You need OpenAI token: Here is the link to get 
@@ -149,8 +151,16 @@ def run_conversation(folder_path):
     count = 0
     while True:
         print("Question ", count + 1)
-        start_time = time.time()
-        query = input(" Ask your question or if you have no further question type stop:\n ")
+
+        try:
+            query = inputimeout(prompt= "Ask your question or if you have no further question type stop:\n ",
+                                timeout=3)
+        except Exception:
+  
+            # Declare the timeout statement
+            print("### You have not asked a question in 5 minutes. Exiting the program. ###")
+            break
+
         if query != "stop":
             print("Answer:\n", run_query(query, reader))
             count += 1
@@ -158,6 +168,3 @@ def run_conversation(folder_path):
             print("### Thanks for using the app! ###")
             break
 
-        if (time.time() - start_time) > 300:  # check if 5 minutes have passed
-            print("### You have not asked a question in 5 minutes. Exiting the program. ###")
-            break
