@@ -154,17 +154,21 @@ def run_conversation(folder_path):
 
         try:
             query = inputimeout(prompt= "Ask your question or if you have no further question type stop:\n ",
-                                timeout=3)
+                                timeout=5000)
+            print(query)
         except Exception:
   
             # Declare the timeout statement
             print("### You have not asked a question in 5 minutes. Exiting the program. ###")
             break
 
-        if query != "stop":
-            print("Answer:\n", run_query(query, reader))
-            count += 1
-        else:
+        if query.lower() == "stop":
             print("### Thanks for using the app! ###")
             break
+        elif query == "":
+            print("### Your input is empty! Try again! ###")
+            continue
+        else:
+            print("Answer:\n", run_query(query, reader))
+            count += 1
 
