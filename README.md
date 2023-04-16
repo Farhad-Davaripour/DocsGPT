@@ -15,10 +15,8 @@ This app is designed to allow users to easily query PDF documents using OpenAI's
 7. After entering your API key, you will be prompted to upload your PDF file. This file will be saved in your Google Drive in the following address: `/content/drive/MyDrive/repo_path`. 
 8. Finally, submit your queries (ask your questions) about the uploaded document. Make sure to type "stop" once you have no further questions.
 
-## Conclusion
+## Feedback
 
 Thank you for using this app! We hope you find it useful for your querying needs. Please don't hesitate to contact to [Farhad Davaripour](https://github.com/Farhad-Davaripour) and [Armin Norouzi](https://github.com/arminnorouzi) with any questions or feedback.
-
-## Credits
 
 
