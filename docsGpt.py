@@ -157,14 +157,15 @@ def run_conversation(folder_path):
         elif query == "":
             print("### Your input is empty! Try again! ###")
             continue
-        elif count % 10 == 0:
-            print("### You asked", count + 1, " questions! \n") 
-            respond_10 = input(" Type yes if you want to continue! if you have no further question type stop!:\n ")
-            if respond_10.lower() == "yes":
+        else:
+            if count % 10 == 0:
+                print("### You asked", count + 1, " questions! \n") 
+                respond_10 = input(" Type yes if you want to continue! if you have no further question type stop!:\n ")
+                if respond_10.lower() == "yes":
+                    print("Answer:\n", run_query(query, reader))
+                    count += 1
+                else:
+                    break
+            else:
                 print("Answer:\n", run_query(query, reader))
                 count += 1
-            else:
-                break
-        else:
-            print("Answer:\n", run_query(query, reader))
-            count += 1
