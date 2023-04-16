@@ -11,6 +11,8 @@ import subprocess
 from google.colab import files
 import os
 import shutil
+import time
+
 
 # List of library names to import
 library_names = ['langchain', 'openai', 'PyPDF2', 'tiktoken', 'faiss-cpu']
@@ -147,10 +149,15 @@ def run_conversation(folder_path):
     count = 0
     while True:
         print("Question ", count + 1)
+        start_time = time.time()
         query = input(" Ask your question or if you have no further question type stop:\n ")
         if query != "stop":
             print("Answer:\n", run_query(query, reader))
             count += 1
         else:
             print("### Thanks for using the app! ###")
+            break
+
+        if (time.time() - start_time) > 300:  # check if 5 minutes have passed
+            print("### You have not asked a question in 5 minutes. Exiting the program. ###")
             break

@@ -1,4 +1,4 @@
-# Welcome to the app!
+# Welcome to DocsGPT using Google Colab!
 
 ## Overview
 
@@ -12,11 +12,13 @@ This app is designed to allow users to easily query PDF documents using OpenAI's
 4. When prompted, click on "Connect to Google Drive" and select your Google account. Click "Allow" to permit access to your Google Drive. This will mount your Google Drive in Google Colab.
 5. The app will begin downloading and installing any necessary packages.
 6. Next, you will be prompted to enter your OpenAI API key. Follow [this tutorial]() to obtain your API key if you have not already done so.
-7. After entering your API key, you will be prompted to upload your PDF file. This file will be saved in your Google Drive in the following address: `/content/drive/MyDrive/repo_path`. 
+7. After entering your API key, you will be prompted to upload your PDF file. This file will be saved in your Google Drive in the following address: `/content/drive/MyDrive/repo_path`.
 8. Finally, submit your queries (ask your questions) about the uploaded document. Make sure to type "stop" once you have no further questions.
 
 ## Feedback
 
 Thank you for using this app! We hope you find it useful for your querying needs. Please don't hesitate to contact to [Farhad Davaripour](https://github.com/Farhad-Davaripour) and [Armin Norouzi](https://github.com/arminnorouzi) with any questions or feedback.
 
+## License
 
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/Farhad-Davaripour/DocsGPT/blob/main/LICENSE.md) file for details.
