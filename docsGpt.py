@@ -49,7 +49,7 @@ embeddings = OpenAIEmbeddings()
 chain = load_qa_chain(OpenAI(), chain_type="stuff")
 
 
-def upload_doc(reader):
+def extract_texts(reader):
     """
     Extracts text from a PDFReader object and splits it into 
     chunks using the CharacterTextSplitter class. 
@@ -100,7 +100,7 @@ def run_query(query, file):
     on the documents returned by the docsearch similarity search.
     """
         
-    docsearch = upload_doc(file)
+    docsearch = extract_texts(file)
     docs = docsearch.similarity_search(query)
     return chain.run(input_documents=docs, question=query)
 
