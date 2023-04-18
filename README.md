@@ -1,4 +1,4 @@
-# Welcome to DocsGPT using Google Colab!
+# Welcome to DocsGPT using Google Colaboratory!
 
 ## Overview
 
