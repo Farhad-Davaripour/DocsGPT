@@ -4,6 +4,11 @@
 
 This app is designed to allow users to easily query PDF documents using OpenAI's GPT-3 language model. The app is designed to be run in Google Colab and utilizes Google Drive for storage and access to PDF documents.
 
+## Tutorial
+Check out the tutorial below:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/omcfqdrjLfs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
 ## How to Use
 
 1. To use the app, navigate to the [run_query.ipynb](https://github.com/Farhad-Davaripour/DocsGPT/blob/main/run_query.ipynb) notebook in the repository.
