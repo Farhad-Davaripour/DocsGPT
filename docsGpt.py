@@ -99,7 +99,6 @@ def run_query(query, docsearch):
     - A string containing the output of the chain library run 
     on the documents returned by the docsearch similarity search.
     """
-        
     
     docs = docsearch.similarity_search(query)
     return chain.run(input_documents=docs, question=query)
@@ -126,7 +125,6 @@ def upload_file(folder_path):
         root_file.append(folder_path + "/" + filename)
         os.remove(filename)
 
-    print(root_file)
 
     return root_file
 
