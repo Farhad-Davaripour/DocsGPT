@@ -15,7 +15,7 @@ import time
 
 
 # List of library names to import
-library_names = ['langchain', 'openai', 'PyPDF2', 'tiktoken', 'faiss-cpu']
+library_names = ['langchain', 'openai', 'PyPDF2', 'tiktoken', 'faiss-cpu', 'textwrap']
 
 # Dynamically import libraries from list
 for name in library_names:
@@ -34,6 +34,7 @@ from langchain.vectorstores import ElasticVectorSearch, Pinecone, Weaviate, FAIS
 from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 from getpass import getpass
+import textwrap
 import os
 
 # adding token
@@ -158,5 +159,8 @@ def run_conversation(folder_path):
             print("### Your input is empty! Try again! ###")
             continue
         else:
-            print("Answer:\n", run_query(query, docsearch))
+            wrapped_text = textwrap.wrap(run_query(query, docsearch), width=100)
+            print("Answer:")
+            for line in wrapped_text:
+                print(line)
             count += 1
