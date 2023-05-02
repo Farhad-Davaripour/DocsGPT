@@ -2,7 +2,7 @@
 # Author: Armin Norouzi, Farhad Davaripour 
 # Contact: https://github.com/Farhad-Davaripour/DocsGPT
 # Date created: April 14, 2023
-# Last modified: May 2, 2023
+# Last modified: May 3, 2023
 # License: MIT License
 
 # Import required modules
@@ -15,7 +15,7 @@ import time
 import tempfile
 
 # List of library names to import
-library_names = ['langchain', 'openai', 'PyPDF2', 'tiktoken', 'faiss-cpu', 'textwrap', 'python-docx']
+library_names = ['langchain', 'openai', 'PyPDF2', 'tiktoken', 'faiss-cpu', 'textwrap', 'python-docx', 'python-pptx']
 
 # Dynamically import libraries from list
 for name in library_names:
@@ -37,6 +37,7 @@ from getpass import getpass
 import textwrap
 import os
 import docx
+import pptx
 
 # adding token
 # print("You need OpenAI token: Here is the link to get 
@@ -54,7 +55,7 @@ chain = load_qa_chain(OpenAI(), chain_type="stuff")
 def extract_texts(root_files):
     """
     Extracts text from uploaded file and puts it in a list.
-    Supported file types: .pdf, .docx
+    Supported file types: .pdf, .docx, .pptx
     If multiple files are provided, their contents are concatenated.
     Args:
     - root_files: A list of file paths to be processed.
@@ -76,7 +77,12 @@ def extract_texts(root_files):
             doc = docx.Document(root_file)
             for paragraph in doc.paragraphs:
                 raw_text += paragraph.text
-
+        elif ext == '.pptx':
+            ppt = pptx.Presentation(root_file)
+            for slide in ppt.slides:
+                for shape in slide.shapes:
+                    if hasattr(shape, 'text'):
+                        raw_text += shape.text
 
     # retreival we don't hit the token size limits. 
     text_splitter = CharacterTextSplitter(        
@@ -87,7 +93,6 @@ def extract_texts(root_files):
                                         )
 
     texts = text_splitter.split_text(raw_text)
-
 
     docsearch = FAISS.from_texts(texts, embeddings)
     return docsearch
