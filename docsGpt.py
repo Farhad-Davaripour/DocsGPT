@@ -2,7 +2,7 @@
 # Author: Armin Norouzi, Farhad Davaripour 
 # Contact: https://github.com/Farhad-Davaripour/DocsGPT
 # Date created: April 14, 2023
-# Last modified: April 14, 2023
+# Last modified: May 2, 2023
 # License: MIT License
 
 # Import required modules
@@ -12,10 +12,10 @@ from google.colab import files
 import os
 import shutil
 import time
-
+import tempfile
 
 # List of library names to import
-library_names = ['langchain', 'openai', 'PyPDF2', 'tiktoken', 'faiss-cpu', 'textwrap']
+library_names = ['langchain', 'openai', 'PyPDF2', 'tiktoken', 'faiss-cpu', 'textwrap', 'python-docx']
 
 # Dynamically import libraries from list
 for name in library_names:
@@ -27,7 +27,7 @@ for name in library_names:
 
 
 # Import required modules
-from PyPDF2 import PdfReader
+from PyPDF2 import PdfReader 
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import ElasticVectorSearch, Pinecone, Weaviate, FAISS
@@ -36,6 +36,7 @@ from langchain.llms import OpenAI
 from getpass import getpass
 import textwrap
 import os
+import docx
 
 # adding token
 # print("You need OpenAI token: Here is the link to get 
@@ -52,14 +53,11 @@ chain = load_qa_chain(OpenAI(), chain_type="stuff")
 
 def extract_texts(root_files):
     """
-    Extracts text from uploaded file and put it in a PDFReader 
-    object and splits it into  chunks using the 
-    CharacterTextSplitter class. 
-    Computes embeddings for each chunk using an embeddings 
-    model and indexes them using the FAISS library. 
+    Extracts text from uploaded file and puts it in a list.
+    Supported file types: .pdf, .docx
+    If multiple files are provided, their contents are concatenated.
     Args:
-    - reader: A PDFReader object containing the PDF file to 
-    be processed.
+    - root_files: A list of file paths to be processed.
     Returns:
     - A FAISS index object containing the embeddings of the 
     text chunks.
@@ -67,11 +65,18 @@ def extract_texts(root_files):
     raw_text = ''
 
     for root_file in root_files:
-      reader = PdfReader(str(root_file))
-      for i, page in enumerate(reader.pages):
-          text = page.extract_text()
-          if text:
-              raw_text += text
+        _, ext = os.path.splitext(root_file)
+        if ext == '.pdf':
+            with open(root_file, 'rb') as f:
+                reader = PdfReader(f)
+                for i in range(len(reader.pages)):
+                    page = reader.pages[i]
+                    raw_text += page.extract_text()
+        elif ext == '.docx':
+            doc = docx.Document(root_file)
+            for paragraph in doc.paragraphs:
+                raw_text += paragraph.text
+
 
     # retreival we don't hit the token size limits. 
     text_splitter = CharacterTextSplitter(        
