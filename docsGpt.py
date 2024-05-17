@@ -15,7 +15,7 @@ import time
 import tempfile
 
 # List of library names to import
-library_names = ['langchain', 'openai', 'PyPDF2', 'tiktoken', 'faiss-cpu', 'textwrap', 'python-docx', 'python-pptx']
+library_names = ['langchain', 'openai', 'PyPDF2', 'tiktoken', 'faiss-cpu', 'textwrap', 'python-docx', 'python-pptx', "langchain-community"]
 
 # Dynamically import libraries from list
 for name in library_names:
