@@ -15,7 +15,7 @@ import time
 import tempfile
 
 # List of library names to import
-library_names = ['langchain', 'openai', 'PyPDF2', 'tiktoken', 'faiss-cpu', 'textwrap', 'python-docx', 'python-pptx']
+library_names = ['langchain', 'openai', 'PyPDF2', 'tiktoken', 'faiss-cpu', 'textwrap', 'python-docx', 'python-pptx', "langchain-community"]
 
 # Dynamically import libraries from list
 for name in library_names:
@@ -49,7 +49,7 @@ os.environ["OPENAI_API_KEY"] = str(token)
 
 # Download embeddings from OpenAI
 embeddings = OpenAIEmbeddings()
-chain = load_qa_chain(OpenAI(), chain_type="stuff")
+chain = load_qa_chain(OpenAI(), chain_type="stuff") 
 
 
 def extract_texts(root_files):
