@@ -49,7 +49,7 @@ os.environ["OPENAI_API_KEY"] = str(token)
 
 # Download embeddings from OpenAI
 embeddings = OpenAIEmbeddings()
-chain = load_qa_chain(OpenAI(), chain_type="stuff")
+chain = load_qa_chain(OpenAI(), chain_type="stuff") 
 
 
 def extract_texts(root_files):
